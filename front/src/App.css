@@ -1,0 +1,77 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* Card premium — borda vidro fumê dourado */
+.card-premium-border {
+  position: relative;
+  isolation: isolate;
+}
+
+.card-premium-border::before {
+  content: '';
+  position: absolute;
+  inset: -1.5px;
+  border-radius: 18px;
+  background: linear-gradient(
+    135deg,
+    rgba(var(--primary-raw, 180, 140, 60), 0.45) 0%,
+    rgba(var(--primary-raw, 180, 140, 60), 0.1) 30%,
+    rgba(255, 255, 255, 0.04) 50%,
+    rgba(var(--primary-raw, 180, 140, 60), 0.1) 70%,
+    rgba(var(--primary-raw, 180, 140, 60), 0.4) 100%
+  );
+  z-index: -1;
+  filter: blur(0.4px);
+}
+
+.card-premium-border::after {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: 22px;
+  background: transparent;
+  box-shadow:
+    0 0 20px rgba(180, 140, 60, 0.12),
+    0 0 50px rgba(180, 140, 60, 0.06);
+  z-index: -2;
+}

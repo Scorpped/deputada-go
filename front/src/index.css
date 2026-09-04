@@ -1,0 +1,148 @@
+/*
+ * Sistema visual da campanha Jandy Marcolino.
+ * Cores extraídas do material oficial: rosa do logotipo, roxo/tinta
+ * da tipografia, azul bebê claro das fotos de estúdio.
+ *
+ * Regra de papel das cores:
+ *   rosa  → única cor interativa (links, botões, foco)
+ *   azul  → nunca interativo, só fundo chapado
+ */
+
+/* ── Fontes da campanha — deve vir ANTES dos @tailwind ─────────────────── */
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Inter+Tight:wght@400;500;600&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* ── Paleta principal ─────────────────────────────────────────────── */
+    /* Fundo: branco papel */
+    --background: 0 0% 100%;
+    --foreground: 280 65% 17%;       /* tinta #3a0f47 */
+
+    /* Cards: branco */
+    --card: 0 0% 100%;
+    --card-foreground: 280 65% 17%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 280 65% 17%;
+
+    /* Primary: rosa #e6187d */
+    --primary: 330 80% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary: azul-fundo #eaf3fb */
+    --secondary: 204 60% 95%;
+    --secondary-foreground: 280 65% 17%;
+
+    --muted: 204 60% 95%;
+    --muted-foreground: 280 25% 43%;  /* tinta-suave #6b5573 */
+
+    /* Accent: rosa-tenue #fde8f1 */
+    --accent: 330 80% 96%;
+    --accent-foreground: 280 65% 17%;
+
+    --destructive: 348 82% 38%;       /* #b3123f */
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 300 20% 89%;            /* linha #e6dcea */
+    --input: 300 20% 89%;
+    --ring: 330 80% 50%;              /* rosa */
+
+    --radius: 0.875rem;
+
+    /* Sidebar: fundo azul-fundo */
+    --sidebar-background: 204 60% 95%;
+    --sidebar-foreground: 280 65% 17%;
+    --sidebar-primary: 330 80% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 330 80% 96%;
+    --sidebar-accent-foreground: 280 65% 17%;
+    --sidebar-border: 300 20% 89%;
+    --sidebar-ring: 330 80% 50%;
+  }
+
+  /* Sem modo escuro neste projeto — a campanha é sempre clara */
+  .dark {
+    --background: 0 0% 100%;
+    --foreground: 280 65% 17%;
+    --card: 0 0% 100%;
+    --card-foreground: 280 65% 17%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 280 65% 17%;
+    --primary: 330 80% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 204 60% 95%;
+    --secondary-foreground: 280 65% 17%;
+    --muted: 204 60% 95%;
+    --muted-foreground: 280 25% 43%;
+    --accent: 330 80% 96%;
+    --accent-foreground: 280 65% 17%;
+    --destructive: 348 82% 38%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 300 20% 89%;
+    --input: 300 20% 89%;
+    --ring: 330 80% 50%;
+    --sidebar-background: 204 60% 95%;
+    --sidebar-foreground: 280 65% 17%;
+    --sidebar-primary: 330 80% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 330 80% 96%;
+    --sidebar-accent-foreground: 280 65% 17%;
+    --sidebar-border: 300 20% 89%;
+    --sidebar-ring: 330 80% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    background-color: #ffffff;
+    color: #3a0f47;
+    color-scheme: light;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
+    min-height: 100dvh;
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Anel de foco sempre rosa, sempre visível para navegação por teclado */
+  :focus-visible {
+    outline: 3px solid #e6187d;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background-color: #e6187d;
+    color: #ffffff;
+  }
+}
+
+@layer components {
+  /*
+   * Animação de entrada das seções ao fazer scroll.
+   * Usa scroll-driven animation nativa — sem JS, sem observer.
+   * Onde o navegador não suporta, o elemento já nasce na posição final.
+   */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .faixa-monta {
+        animation: faixa-entra linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 55%;
+      }
+    }
+  }
+}
