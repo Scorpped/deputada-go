@@ -100,6 +100,8 @@ export interface AdminDashboardResponse {
 export interface LiderDashboardResponse {
   total_indicados: number;
   cadastros_por_dia: CadastrosPorDia[];
+  referral_code: string;
+  referral_link: string;
 }
 
 export interface PaginationParams {

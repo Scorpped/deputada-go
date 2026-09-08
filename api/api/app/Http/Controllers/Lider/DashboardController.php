@@ -49,6 +49,8 @@ class DashboardController extends Controller
         return response()->json([
             'total_indicados'   => $totalIndicados,
             'cadastros_por_dia' => $cadastrosPorDia,
+            'referral_code'     => $referralCode,
+            'referral_link'     => $user->referral_link,
         ]);
     }
 }

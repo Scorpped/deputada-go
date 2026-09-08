@@ -1,9 +1,61 @@
-import { Users, RefreshCw, AlertCircle } from "lucide-react";
+import { useState } from "react";
+import { Users, RefreshCw, AlertCircle, Copy, Check } from "lucide-react";
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
 } from "recharts";
 import { useLiderDashboard } from "@/hooks/useLiderDashboard";
 import { Button } from "@/components/ui/button";
+
+// ─── Referral link card ─────────────────────────────────────────────────────
+
+function ReferralLinkCard({ link }: { link: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(link);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // ignore clipboard errors
+    }
+  };
+
+  return (
+    <div className="rounded-xl border border-border bg-card p-6">
+      <p className="mb-3 text-sm font-medium text-muted-foreground">
+        Seu link de indicação
+      </p>
+      <div className="flex items-center gap-2 rounded-lg border border-border bg-muted/40 px-4 py-3">
+        <span className="flex-1 truncate font-mono text-sm text-foreground" title={link}>
+          {link}
+        </span>
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          onClick={handleCopy}
+          className="shrink-0 gap-1.5"
+        >
+          {copied ? (
+            <>
+              <Check className="h-3.5 w-3.5 text-green-500" />
+              Copiado
+            </>
+          ) : (
+            <>
+              <Copy className="h-3.5 w-3.5" />
+              Copiar
+            </>
+          )}
+        </Button>
+      </div>
+      <p className="mt-2 text-xs text-muted-foreground">
+        Compartilhe esse link — todo cadastro feito por ele conta como seu indicado.
+      </p>
+    </div>
+  );
+}
 
 function CardSkeleton() {
   return (
@@ -77,6 +129,8 @@ export default function LiderDashboard() {
   return (
     <div className="space-y-6">
       <h1 className="text-xl font-semibold text-foreground">Meu Dashboard</h1>
+
+      {data?.referral_link && <ReferralLinkCard link={data.referral_link} />}
 
       <MetricCard
         label="Total de Indicados"

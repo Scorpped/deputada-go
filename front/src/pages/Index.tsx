@@ -467,10 +467,8 @@ const Index = () => {
                       htmlFor="lgpd"
                       className="font-body text-sm leading-relaxed text-tinta cursor-pointer"
                     >
-                      Autorizo a campanha de {campanha.nome} a guardar meu nome, e-mail,
-                      telefone e cidade para falar comigo sobre esta candidatura. Sei que
-                      apoio político é dado pessoal sensível e que posso pedir a exclusão
-                      quando quiser.
+                      Concordo com os termos de uso e política de privacidade (LGPD).
+                      Autorizo o armazenamento e uso dos meus dados para contato. *
                     </Label>
                   </label>
                   <CampoErro mensagem={errors.lgpd_aceito?.message} />
@@ -532,8 +530,7 @@ const Index = () => {
           <p className="mt-8 max-w-[70ch] font-body text-xs leading-relaxed text-papel/55">
             Propaganda eleitoral. Conteúdo de responsabilidade da campanha de{" "}
             {campanha.nome}, {campanha.partido} {campanha.numeroPartido},{" "}
-            {campanha.estado}. CNPJ {campanha.cnpj}. Nenhuma imagem deste site foi
-            gerada por inteligência artificial.
+            {campanha.estado}.
           </p>
         </div>
       </footer>
